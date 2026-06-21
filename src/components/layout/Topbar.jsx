@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Sun, Moon, Bell, Search, User, Settings, LogOut, ChevronDown, Menu } from 'lucide-react';
+import { Sun, Moon, Bell, Search, User, Settings, LogOut, ChevronDown, Menu, X } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import Avatar from '../ui/Avatar';
@@ -12,6 +12,18 @@ export default function Topbar({ onMenuClick }) {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+
+  // Close dropdowns on click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.pb-notif-wrapper') && !event.target.closest('.pb-profile-dropdown-wrapper')) {
+        setShowDropdown(false);
+        setShowNotifications(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const getPageTitle = () => {
     const path = location.pathname;
@@ -183,12 +195,12 @@ export default function Topbar({ onMenuClick }) {
         .pb-notif-panel {
           position: absolute;
           top: 60px;
-          right: 120px;
+          right: 0;
           background-color: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: var(--radius-md);
           box-shadow: var(--shadow-xl);
-          width: 320px;
+          width: 300px;
           max-height: 400px;
           overflow-y: auto;
           padding: var(--space-3);
@@ -196,6 +208,12 @@ export default function Topbar({ onMenuClick }) {
           flex-direction: column;
           gap: var(--space-2);
           animation: scaleIn 0.2s ease forwards;
+        }
+        @media (max-width: 480px) {
+          .pb-notif-panel {
+            right: -60px;
+            width: 280px;
+          }
         }
         .pb-notif-header {
           font-size: var(--font-size-xs);
@@ -246,14 +264,23 @@ export default function Topbar({ onMenuClick }) {
           {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
         </button>
 
-        <div className="relative">
+        <div className="relative pb-notif-wrapper">
           <button className="pb-icon-btn" onClick={() => { setShowNotifications(!showNotifications); setShowDropdown(false); }} aria-label="Notifications">
             <Bell size={20} />
             <span className="pb-badge-count" />
           </button>
           {showNotifications && (
             <div className="pb-notif-panel">
-              <div className="pb-notif-header">Notifications</div>
+              <div className="pb-notif-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>Notifications</span>
+                <button 
+                  onClick={() => setShowNotifications(false)} 
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', padding: '2px' }}
+                  aria-label="Close notifications"
+                >
+                  <X size={14} />
+                </button>
+              </div>
               {notifications.map((n) => (
                 <div key={n.id} className={`pb-notif-item ${n.unread ? 'pb-notif-item-unread' : ''}`}>
                   <span>{n.text}</span>
@@ -264,7 +291,7 @@ export default function Topbar({ onMenuClick }) {
           )}
         </div>
 
-        <div className="relative">
+        <div className="relative pb-profile-dropdown-wrapper">
           <button className="pb-profile-dropdown-trigger" onClick={() => { setShowDropdown(!showDropdown); setShowNotifications(false); }}>
             <Avatar src={user?.avatar} name={user?.name || 'User'} size="sm" />
             <ChevronDown size={16} className="pb-profile-chevron" style={{ color: 'var(--text-secondary)' }} />
