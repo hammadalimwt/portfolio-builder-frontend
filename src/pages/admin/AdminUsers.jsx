@@ -82,6 +82,7 @@ export default function AdminUsers() {
           display: flex;
           gap: var(--space-4);
           align-items: center;
+          flex-wrap: wrap;
         }
         .pb-table-card {
           background-color: var(--bg-card);
@@ -113,7 +114,7 @@ export default function AdminUsers() {
       </div>
 
       <div className="pb-controls">
-        <div style={{ position: 'relative', width: '280px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '280px' }}>
           <Search size={16} style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-muted)' }} />
           <input
             type="text"

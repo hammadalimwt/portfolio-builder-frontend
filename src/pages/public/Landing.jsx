@@ -123,11 +123,17 @@ export default function Landing() {
         }
         .pb-stats-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: 1fr;
           gap: var(--space-4);
         }
         .pb-stat-card {
           text-align: center;
+          padding: var(--space-2);
+        }
+        .pb-stat-card-middle {
+          border-top: 1px solid var(--border);
+          border-bottom: 1px solid var(--border);
+          padding: var(--space-4) 0;
         }
         .pb-stat-num {
           font-size: var(--font-size-2xl);
@@ -137,6 +143,18 @@ export default function Landing() {
         .pb-stat-label {
           font-size: var(--font-size-xs);
           color: var(--text-secondary);
+        }
+        @media (min-width: 576px) {
+          .pb-stats-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          .pb-stat-card-middle {
+            border-top: none;
+            border-bottom: none;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            padding: var(--space-2);
+          }
         }
 
         /* Features */
@@ -208,6 +226,7 @@ export default function Landing() {
           justify-content: center;
           gap: var(--space-2);
           margin-bottom: var(--space-10);
+          flex-wrap: wrap;
         }
         .pb-tab-btn {
           padding: var(--space-2) var(--space-4);
@@ -323,7 +342,7 @@ export default function Landing() {
               <div className="pb-stat-num">10k+</div>
               <div className="pb-stat-label">Portfolios Built</div>
             </div>
-            <div className="pb-stat-card" style={{ borderLeft: '1px solid var(--border)', borderRight: '1px solid var(--border)' }}>
+            <div className="pb-stat-card pb-stat-card-middle">
               <div className="pb-stat-num">50+</div>
               <div className="pb-stat-label">Premium Assets</div>
             </div>

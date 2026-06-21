@@ -130,6 +130,7 @@ export default function ProfileSettings() {
           gap: var(--space-1);
           border-bottom: 1px solid var(--border);
           padding-bottom: 2px;
+          flex-wrap: wrap;
         }
         .pb-settings-tab {
           display: flex;
@@ -140,6 +141,7 @@ export default function ProfileSettings() {
           font-weight: var(--fw-semibold);
           border-bottom: 2px solid transparent;
           cursor: pointer;
+          transition: var(--transition-fast);
         }
         .pb-settings-tab-active {
           color: var(--primary);
@@ -198,6 +200,16 @@ export default function ProfileSettings() {
         .pb-theme-card-active {
           border-color: var(--primary);
           background-color: var(--bg-secondary);
+        }
+
+        @media (max-width: 480px) {
+          .pb-settings-tab {
+            padding: var(--space-2) var(--space-3);
+            font-size: var(--font-size-xs);
+          }
+          .pb-themes-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (min-width: 768px) {

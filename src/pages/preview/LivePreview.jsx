@@ -163,7 +163,7 @@ export default function LivePreview() {
           grid-template-columns: 1fr;
           gap: var(--space-6);
           font-family: var(--font-family);
-          height: calc(100vh - 120px);
+          height: auto;
         }
         .pb-preview-editor {
           display: flex;
@@ -179,6 +179,7 @@ export default function LivePreview() {
           display: flex;
           flex-direction: column;
           overflow: hidden;
+          height: 500px;
         }
         .pb-preview-toolbar {
           height: 50px;
@@ -211,7 +212,18 @@ export default function LivePreview() {
         }
  
         @media (min-width: 1024px) {
-          .pb-live-preview { grid-template-columns: 360px 1fr; }
+          .pb-live-preview {
+            grid-template-columns: 360px 1fr;
+            height: calc(100vh - 120px);
+          }
+          .pb-preview-frame-container {
+            height: 100%;
+          }
+        }
+        @media (max-width: 768px) {
+          .pb-iframe-wrapper {
+            padding: var(--space-2);
+          }
         }
       `}</style>
  

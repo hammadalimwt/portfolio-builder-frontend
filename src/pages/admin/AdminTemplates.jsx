@@ -148,6 +148,17 @@ export default function AdminTemplates() {
           padding-top: var(--space-4);
         }
 
+        @media (max-width: 480px) {
+          .pb-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: var(--space-3);
+          }
+          .pb-header button {
+            width: 100%;
+          }
+        }
+
         @media (min-width: 768px) {
           .pb-grid { grid-template-columns: repeat(3, 1fr); }
         }
