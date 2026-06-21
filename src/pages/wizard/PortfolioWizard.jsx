@@ -552,8 +552,53 @@ export default function PortfolioWizard() {
         /* Type Grid select cards */
         .pb-type-select-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           gap: var(--space-4);
+        }
+        @media (min-width: 480px) {
+          .pb-type-select-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        /* Template Grid select */
+        .pb-template-select-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-4);
+        }
+        @media (min-width: 480px) {
+          .pb-template-select-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        /* Form Grid responsiveness */
+        .pb-wiz-form-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-3);
+        }
+        @media (min-width: 576px) {
+          .pb-wiz-form-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .pb-wiz-footer {
+            padding: var(--space-3) var(--space-4) !important;
+            gap: var(--space-2) !important;
+          }
+          .pb-wiz-footer .pb-btn {
+            padding: var(--space-2) var(--space-3) !important;
+            font-size: var(--font-size-xs) !important;
+            gap: 4px !important;
+          }
+          .pb-wiz-footer .pb-btn svg {
+            width: 14px !important;
+            height: 14px !important;
+          }
         }
         .pb-type-select-card {
           border: 2px solid var(--border);
@@ -659,7 +704,7 @@ export default function PortfolioWizard() {
 
           {/* Step 2: Choose template */}
           {currentStep === 2 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+            <div className="pb-template-select-grid">
               {templates.length === 0 ? (
                 <div style={{ gridColumn: 'span 2' }}>
                   <Skeleton variant="card" />
@@ -794,7 +839,7 @@ export default function PortfolioWizard() {
               {formData.experience.map((exp, idx) => (
                 <div key={exp.id || `exp-${idx}`} className="pb-rep-card animate-fadeIn">
                   <button onClick={() => removeExperience(idx)} style={{ position: 'absolute', top: '12px', right: '12px', color: 'var(--error)' }}><Trash2 size={16} /></button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
+                  <div className="pb-wiz-form-grid">
                     <Input label="Company" value={exp.company} onChange={(e) => handleExperienceChange(idx, 'company', e.target.value)} />
                     <Input label="Position" value={exp.position} onChange={(e) => handleExperienceChange(idx, 'position', e.target.value)} />
                     <Input label="Start Date" value={exp.startDate} placeholder="e.g. Jan 2023" onChange={(e) => handleExperienceChange(idx, 'startDate', e.target.value)} />
@@ -816,7 +861,7 @@ export default function PortfolioWizard() {
               {formData.education.map((edu, idx) => (
                 <div key={edu.id || `edu-${idx}`} className="pb-rep-card animate-fadeIn">
                   <button onClick={() => removeEducation(idx)} style={{ position: 'absolute', top: '12px', right: '12px', color: 'var(--error)' }}><Trash2 size={16} /></button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
+                  <div className="pb-wiz-form-grid">
                     <Input label="Institution" value={edu.institution} onChange={(e) => handleEducationChange(idx, 'institution', e.target.value)} />
                     <Input label="Degree / Course" value={edu.degree} onChange={(e) => handleEducationChange(idx, 'degree', e.target.value)} />
                     <Input label="Graduation Year" value={edu.year} onChange={(e) => handleEducationChange(idx, 'year', e.target.value)} />
@@ -837,7 +882,7 @@ export default function PortfolioWizard() {
               {formData.projects.map((proj, idx) => (
                 <div key={proj.id || `proj-${idx}`} className="pb-rep-card animate-fadeIn">
                   <button onClick={() => removeProject(idx)} style={{ position: 'absolute', top: '12px', right: '12px', color: 'var(--error)' }}><Trash2 size={16} /></button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
+                  <div className="pb-wiz-form-grid">
                     <Input label="Project Name" value={proj.name} onChange={(e) => handleProjectChange(idx, 'name', e.target.value)} />
                     <Input label="GitHub Link" icon={Github} value={proj.githubLink} onChange={(e) => handleProjectChange(idx, 'githubLink', e.target.value)} />
                     <Input label="Live Demo URL" icon={Globe} value={proj.liveDemo} onChange={(e) => handleProjectChange(idx, 'liveDemo', e.target.value)} />
@@ -870,7 +915,7 @@ export default function PortfolioWizard() {
               {formData.certificates.map((cert, idx) => (
                 <div key={cert.id || `cert-${idx}`} className="pb-rep-card animate-fadeIn">
                   <button onClick={() => removeCertificate(idx)} style={{ position: 'absolute', top: '12px', right: '12px', color: 'var(--error)' }}><Trash2 size={16} /></button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
+                  <div className="pb-wiz-form-grid">
                     <Input label="Certificate Name" value={cert.name} onChange={(e) => handleCertificateChange(idx, 'name', e.target.value)} />
                     <Input label="Organization" value={cert.organization} onChange={(e) => handleCertificateChange(idx, 'organization', e.target.value)} />
                     <Input label="Date Issued" value={cert.date} onChange={(e) => handleCertificateChange(idx, 'date', e.target.value)} />
