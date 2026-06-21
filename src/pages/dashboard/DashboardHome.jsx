@@ -122,6 +122,12 @@ export default function DashboardHome() {
           grid-template-columns: 1fr;
           gap: var(--space-8);
         }
+        .pb-dash-main-col {
+          order: 2;
+        }
+        .pb-dash-side-col {
+          order: 1;
+        }
         
         /* Quick actions */
         .pb-quick-actions {
@@ -185,6 +191,12 @@ export default function DashboardHome() {
         @media (min-width: 1024px) {
           .pb-stats-row { grid-template-columns: repeat(4, 1fr); }
           .pb-dash-grid { grid-template-columns: 1.5fr 1fr; }
+          .pb-dash-main-col {
+            order: 1;
+          }
+          .pb-dash-side-col {
+            order: 2;
+          }
         }
         @media (max-width: 480px) {
           .pb-portfolio-row {
@@ -223,7 +235,7 @@ export default function DashboardHome() {
 
       <div className="pb-dash-grid">
         {/* Left Side: Portfolios */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <div className="pb-dash-main-col" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h3 style={{ margin: 0, fontSize: '18px' }}>Recent Portfolios</h3>
             {portfolios.length > 0 && (
@@ -277,7 +289,7 @@ export default function DashboardHome() {
         </div>
 
         {/* Right Side: Quick Actions & Help */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+        <div className="pb-dash-side-col" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
           <h3 style={{ margin: 0, fontSize: '18px' }}>Quick Actions</h3>
           <div className="pb-quick-actions">
             <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/create')}>
