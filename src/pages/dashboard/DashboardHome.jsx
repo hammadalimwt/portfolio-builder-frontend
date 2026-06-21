@@ -98,6 +98,7 @@ export default function DashboardHome() {
         .pb-stat-icon-wrapper {
           width: 48px;
           height: 48px;
+          flex-shrink: 0;
           border-radius: var(--radius-md);
           display: flex;
           align-items: center;

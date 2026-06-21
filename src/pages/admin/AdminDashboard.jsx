@@ -89,6 +89,7 @@ export default function AdminDashboard() {
         .pb-stat-icon {
           width: 40px;
           height: 40px;
+          flex-shrink: 0;
           border-radius: var(--radius-md);
           display: flex;
           align-items: center;
