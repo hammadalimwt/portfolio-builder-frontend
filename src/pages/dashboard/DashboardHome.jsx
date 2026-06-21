@@ -70,10 +70,10 @@ export default function DashboardHome() {
   };
 
   const stats = [
-    { label: 'Total Portfolios', val: portfolios.length, icon: FolderOpen, color: '#4f6ef7' },
-    { label: 'Total Downloads', val: downloadsCount, icon: Download, color: '#9b5cf6' },
-    { label: 'Completed', val: portfolios.filter(p => p.status === 'COMPLETED' || p.status === 'DOWNLOADED').length, icon: CheckCircle, color: '#22c55e' },
-    { label: 'Drafts', val: portfolios.filter(p => p.status === 'DRAFT').length, icon: FileText, color: '#f59e0b' },
+    { label: 'Total Portfolios', val: portfolios.length, icon: FolderOpen, color: '#4f6ef7', link: '/dashboard/portfolios' },
+    { label: 'Total Downloads', val: downloadsCount, icon: Download, color: '#9b5cf6', link: '/dashboard/downloads' },
+    { label: 'Completed', val: portfolios.filter(p => p.status === 'COMPLETED' || p.status === 'DOWNLOADED').length, icon: CheckCircle, color: '#22c55e', link: '/dashboard/portfolios' },
+    { label: 'Drafts', val: portfolios.filter(p => p.status === 'DRAFT').length, icon: FileText, color: '#f59e0b', link: '/dashboard/portfolios' },
   ];
 
   return (
@@ -283,7 +283,12 @@ export default function DashboardHome() {
           <Skeleton variant="card" count={4} height="80px" />
         ) : (
           stats.map((s, idx) => (
-            <Card key={idx} className="pb-stat-box">
+            <Card
+              key={idx}
+              className="pb-stat-box"
+              hoverable={true}
+              onClick={() => navigate(s.link)}
+            >
               <div className="pb-stat-icon-wrapper" style={{ backgroundColor: s.color }}>
                 <s.icon size={22} />
               </div>
