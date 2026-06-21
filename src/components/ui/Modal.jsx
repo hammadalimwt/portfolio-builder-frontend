@@ -90,6 +90,17 @@ export default function Modal({
           overflow-y: auto;
           flex-grow: 1;
         }
+        @media (max-width: 576px) {
+          .pb-modal-overlay {
+            padding: var(--space-2);
+          }
+          .pb-modal-header {
+            padding: var(--space-3) var(--space-4);
+          }
+          .pb-modal-body {
+            padding: var(--space-3);
+          }
+        }
       `}</style>
       <div
         className={`pb-modal-card pb-modal-card-${size} animate-scaleIn ${className}`}

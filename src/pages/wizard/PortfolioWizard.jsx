@@ -600,6 +600,75 @@ export default function PortfolioWizard() {
             height: 14px !important;
           }
         }
+
+        /* Preview Toolbar Responsiveness */
+        .pb-preview-toolbar-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 16px;
+          border-bottom: 1px solid var(--border);
+          flex-wrap: wrap;
+          gap: 12px;
+          width: 100%;
+        }
+        .pb-preview-toolbar-section {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .pb-preview-toolbar-label {
+          font-size: 13px;
+          color: var(--text-secondary);
+          font-weight: var(--fw-semibold);
+        }
+        .pb-preview-buttons-group {
+          display: flex;
+          background: var(--bg-secondary);
+          border-radius: var(--radius-md);
+          padding: 2px;
+          border: 1px solid var(--border);
+        }
+        .pb-preview-device-btn {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 6px 12px;
+          border-radius: var(--radius-sm);
+          border: none;
+          font-size: 13px;
+          font-weight: var(--fw-semibold);
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        @media (max-width: 576px) {
+          .pb-preview-toolbar-container {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+          }
+          .pb-preview-toolbar-section {
+            justify-content: space-between;
+            width: 100%;
+          }
+          .pb-preview-toolbar-label {
+            display: none; /* Hide labels on mobile to save space */
+          }
+          .pb-preview-buttons-group {
+            width: 100%;
+          }
+          .pb-preview-device-btn {
+            flex: 1;
+            justify-content: center;
+            padding: 6px 8px;
+            font-size: 12px;
+          }
+          .pb-preview-toolbar-section select {
+            flex-grow: 1;
+          }
+        }
         .pb-type-select-card {
           border: 2px solid var(--border);
           border-radius: var(--radius-md);
@@ -1009,71 +1078,36 @@ export default function PortfolioWizard() {
         >
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '16px' }}>
             {/* Device Switcher & Zoom Toolbar */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingBottom: '16px',
-              borderBottom: '1px solid var(--border)',
-              flexWrap: 'wrap',
-              gap: '12px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 'var(--fw-semibold)' }}>Responsive View:</span>
-                <div style={{ display: 'flex', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', padding: '2px', border: '1px solid var(--border)' }}>
+            <div className="pb-preview-toolbar-container">
+              <div className="pb-preview-toolbar-section">
+                <span className="pb-preview-toolbar-label">Responsive View:</span>
+                <div className="pb-preview-buttons-group">
                   <button
                     onClick={() => setPreviewDevice('desktop')}
+                    className="pb-preview-device-btn"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '6px 12px',
-                      borderRadius: 'var(--radius-sm)',
-                      border: 'none',
-                      fontSize: '13px',
-                      fontWeight: 'var(--fw-semibold)',
-                      cursor: 'pointer',
                       backgroundColor: previewDevice === 'desktop' ? 'var(--primary)' : 'transparent',
                       color: previewDevice === 'desktop' ? 'white' : 'var(--text-secondary)',
-                      transition: 'all 0.2s'
                     }}
                   >
                     <Monitor size={14} /> Desktop
                   </button>
                   <button
                     onClick={() => setPreviewDevice('tablet')}
+                    className="pb-preview-device-btn"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '6px 12px',
-                      borderRadius: 'var(--radius-sm)',
-                      border: 'none',
-                      fontSize: '13px',
-                      fontWeight: 'var(--fw-semibold)',
-                      cursor: 'pointer',
                       backgroundColor: previewDevice === 'tablet' ? 'var(--primary)' : 'transparent',
                       color: previewDevice === 'tablet' ? 'white' : 'var(--text-secondary)',
-                      transition: 'all 0.2s'
                     }}
                   >
                     <Tablet size={14} /> Tablet
                   </button>
                   <button
                     onClick={() => setPreviewDevice('mobile')}
+                    className="pb-preview-device-btn"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '6px 12px',
-                      borderRadius: 'var(--radius-sm)',
-                      border: 'none',
-                      fontSize: '13px',
-                      fontWeight: 'var(--fw-semibold)',
-                      cursor: 'pointer',
                       backgroundColor: previewDevice === 'mobile' ? 'var(--primary)' : 'transparent',
                       color: previewDevice === 'mobile' ? 'white' : 'var(--text-secondary)',
-                      transition: 'all 0.2s'
                     }}
                   >
                     <Smartphone size={14} /> Mobile
@@ -1081,8 +1115,8 @@ export default function PortfolioWizard() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 'var(--fw-semibold)' }}>Zoom:</span>
+              <div className="pb-preview-toolbar-section">
+                <span className="pb-preview-toolbar-label">Zoom:</span>
                 <select
                   value={previewZoom}
                   onChange={(e) => setPreviewZoom(Number(e.target.value))}
