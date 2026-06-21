@@ -98,6 +98,7 @@ export default function Downloads() {
           display: flex;
           gap: var(--space-4);
           align-items: center;
+          flex-wrap: wrap;
         }
         .pb-table-container {
           background-color: var(--bg-card);
@@ -122,6 +123,54 @@ export default function Downloads() {
         }
         .pb-downloads-table tr:hover td {
           background-color: var(--bg-card-hover);
+        }
+
+        @media (max-width: 768px) {
+          .pb-table-container {
+            border: none;
+            background: transparent;
+          }
+          .pb-downloads-table thead {
+            display: none;
+          }
+          .pb-downloads-table, 
+          .pb-downloads-table tbody, 
+          .pb-downloads-table tr, 
+          .pb-downloads-table td {
+            display: block;
+            width: 100%;
+          }
+          .pb-downloads-table tr {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-sm);
+          }
+          .pb-downloads-table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) 0 !important;
+            border-bottom: 1px dashed var(--border) !important;
+            text-align: right;
+            font-size: var(--font-size-xs);
+          }
+          .pb-downloads-table td:last-child {
+            border-bottom: none !important;
+            padding-top: var(--space-4) !important;
+            justify-content: flex-end;
+          }
+          .pb-downloads-table td::before {
+            content: attr(data-label);
+            font-weight: var(--fw-bold);
+            color: var(--text-secondary);
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+          }
         }
       `}</style>
 
@@ -175,18 +224,18 @@ export default function Downloads() {
             <tbody>
               {filtered.map((item) => (
                 <tr key={item._id}>
-                  <td>
+                  <td data-label="Portfolio">
                     <strong>{item.portfolioId?.title || 'Unknown Portfolio'}</strong>
                   </td>
-                  <td>{item.templateId?.name || 'Default Template'}</td>
-                  <td>v{item.version || 1}</td>
-                  <td>
+                  <td data-label="Template Used">{item.templateId?.name || 'Default Template'}</td>
+                  <td data-label="Version">v{item.version || 1}</td>
+                  <td data-label="Status">
                     <Badge variant={item.status === 'SUCCESS' ? 'success' : 'error'}>
                       {item.status || 'SUCCESS'}
                     </Badge>
                   </td>
-                  <td>{new Date(item.createdAt).toLocaleString()}</td>
-                  <td style={{ textAlign: 'right' }}>
+                  <td data-label="Downloaded Date">{new Date(item.createdAt).toLocaleString()}</td>
+                  <td data-label="Action" style={{ textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <Button
                         variant="secondary"
