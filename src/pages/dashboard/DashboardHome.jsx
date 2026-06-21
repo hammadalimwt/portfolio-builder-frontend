@@ -195,6 +195,30 @@ export default function DashboardHome() {
             order: 1;
           }
         }
+        @media (max-width: 768px) {
+          .pb-stats-row {
+            gap: var(--space-3);
+          }
+          .pb-stats-row .pb-stat-box {
+            padding: var(--space-3) !important;
+            gap: var(--space-3);
+          }
+          .pb-stat-icon-wrapper {
+            width: 40px;
+            height: 40px;
+          }
+          .pb-stat-icon-wrapper svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+          .pb-stat-number {
+            font-size: var(--font-size-lg);
+            line-height: 1.2;
+          }
+          .pb-stat-label {
+            font-size: 11px;
+          }
+        }
         @media (max-width: 480px) {
           .pb-portfolio-row {
             flex-direction: column;
@@ -206,6 +230,11 @@ export default function DashboardHome() {
             justify-content: flex-end;
           }
           .pb-quick-actions {
+            grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 380px) {
+          .pb-stats-row {
             grid-template-columns: 1fr;
           }
         }

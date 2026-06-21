@@ -50,6 +50,9 @@ export default function DashboardLayout() {
           .pb-main-container-collapsed {
             padding-left: 0;
           }
+          .pb-dashboard-content {
+            padding: var(--space-6) var(--space-4);
+          }
           .pb-sidebar-backdrop {
             display: block;
             position: fixed;
