@@ -82,7 +82,7 @@ export default function DashboardHome() {
         .pb-dash-home {
           display: flex;
           flex-direction: column;
-          gap: var(--space-8);
+          gap: var(--space-6);
           font-family: var(--font-family);
         }
         .pb-stats-row {
@@ -118,10 +118,21 @@ export default function DashboardHome() {
           color: var(--text-secondary);
         }
 
-        .pb-dash-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--space-8);
+        .pb-dash-portfolios-col {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+        
+        .pb-quick-actions-col {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+        
+        .pb-inspiration-col {
+          display: flex;
+          flex-direction: column;
         }
         
         /* Quick actions */
@@ -184,15 +195,41 @@ export default function DashboardHome() {
         }
 
         @media (min-width: 1024px) {
-          .pb-stats-row { grid-template-columns: repeat(4, 1fr); }
-          .pb-dash-grid { grid-template-columns: 1.5fr 1fr; }
+          .pb-dash-home {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            grid-auto-flow: row;
+            gap: var(--space-8);
+          }
+          .pb-stats-row {
+            grid-template-columns: repeat(4, 1fr);
+            grid-column: span 2;
+          }
+          .pb-dash-portfolios-col {
+            grid-column: 1;
+            grid-row: 2 / 4;
+          }
+          .pb-quick-actions-col {
+            grid-column: 2;
+            grid-row: 2;
+          }
+          .pb-inspiration-col {
+            grid-column: 2;
+            grid-row: 3;
+          }
         }
         @media (max-width: 1023px) {
-          .pb-dash-portfolios-col {
+          .pb-quick-actions-col {
+            order: 1;
+          }
+          .pb-stats-row {
             order: 2;
           }
-          .pb-dash-actions-col {
-            order: 1;
+          .pb-dash-portfolios-col {
+            order: 3;
+          }
+          .pb-inspiration-col {
+            order: 4;
           }
         }
         @media (max-width: 768px) {
@@ -259,92 +296,93 @@ export default function DashboardHome() {
         )}
       </div>
 
-      <div className="pb-dash-grid">
-        {/* Left Side: Portfolios */}
-        <div className="pb-dash-portfolios-col" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '18px' }}>Recent Portfolios</h3>
-            {portfolios.length > 0 && (
-              <Link to="/dashboard/portfolios" style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: 'semibold', display: 'flex', alignItems: 'center' }}>
-                View All <ArrowRight size={14} style={{ marginLeft: '4px' }} />
-              </Link>
-            )}
-          </div>
-
-          {loading ? (
-            <Skeleton variant="table-row" count={3} height="70px" />
-          ) : portfolios.length === 0 ? (
-            <EmptyState
-              icon={FolderOpen}
-              title="No portfolios yet"
-              description="Kickstart your professional page in just a few clicks."
-              actionLabel="Create Portfolio"
-              onAction={() => navigate('/dashboard/create')}
-            />
-          ) : (
-            <div className="pb-portfolio-mini-list">
-              {portfolios.slice(0, 4).map((p) => (
-                <div key={p.id} className="pb-portfolio-row">
-                  <div className="pb-portfolio-row-info">
-                    <div className="pb-portfolio-thumbnail">
-                      <FileText size={20} />
-                    </div>
-                    <div className="pb-portfolio-meta">
-                      <span style={{ fontWeight: 'bold', fontSize: '14px' }}>{p.title}</span>
-                      <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                        Type: {p.portfolioType} | Updated: {new Date(p.updatedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pb-row-actions">
-                    {getStatusBadge(p.status)}
-                    <button className="pb-icon-btn" onClick={() => navigate(`/dashboard/edit/${p.id}`)} title="Edit">
-                      <Edit size={16} />
-                    </button>
-                    <button className="pb-icon-btn" onClick={() => navigate(`/dashboard/preview/${p.id}`)} title="Live Preview">
-                      <Eye size={16} />
-                    </button>
-                    <button className="pb-icon-btn" onClick={() => setDeleteId(p.id)} title="Delete" style={{ color: 'var(--error)' }}>
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* Left Side: Portfolios */}
+      <div className="pb-dash-portfolios-col">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ margin: 0, fontSize: '18px' }}>Recent Portfolios</h3>
+          {portfolios.length > 0 && (
+            <Link to="/dashboard/portfolios" style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: 'semibold', display: 'flex', alignItems: 'center' }}>
+              View All <ArrowRight size={14} style={{ marginLeft: '4px' }} />
+            </Link>
           )}
         </div>
 
-        {/* Right Side: Quick Actions & Help */}
-        <div className="pb-dash-actions-col" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-          <h3 style={{ margin: 0, fontSize: '18px' }}>Quick Actions</h3>
-          <div className="pb-quick-actions">
-            <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/create')}>
-              <Plus size={20} style={{ color: 'var(--primary)' }} />
-              <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Create Portfolio</span>
-            </Card>
-            <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/downloads')}>
-              <History size={20} style={{ color: 'var(--accent)' }} />
-              <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Downloads</span>
-            </Card>
-            <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/settings')}>
-              <Settings size={20} style={{ color: 'var(--success)' }} />
-              <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Settings</span>
-            </Card>
+        {loading ? (
+          <Skeleton variant="table-row" count={3} height="70px" />
+        ) : portfolios.length === 0 ? (
+          <EmptyState
+            icon={FolderOpen}
+            title="No portfolios yet"
+            description="Kickstart your professional page in just a few clicks."
+            actionLabel="Create Portfolio"
+            onAction={() => navigate('/dashboard/create')}
+          />
+        ) : (
+          <div className="pb-portfolio-mini-list">
+            {portfolios.slice(0, 4).map((p) => (
+              <div key={p.id} className="pb-portfolio-row">
+                <div className="pb-portfolio-row-info">
+                  <div className="pb-portfolio-thumbnail">
+                    <FileText size={20} />
+                  </div>
+                  <div className="pb-portfolio-meta">
+                    <span style={{ fontWeight: 'bold', fontSize: '14px' }}>{p.title}</span>
+                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                      Type: {p.portfolioType} | Updated: {new Date(p.updatedAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+                <div className="pb-row-actions">
+                  {getStatusBadge(p.status)}
+                  <button className="pb-icon-btn" onClick={() => navigate(`/dashboard/edit/${p.id}`)} title="Edit">
+                    <Edit size={16} />
+                  </button>
+                  <button className="pb-icon-btn" onClick={() => navigate(`/dashboard/preview/${p.id}`)} title="Live Preview">
+                    <Eye size={16} />
+                  </button>
+                  <button className="pb-icon-btn" onClick={() => setDeleteId(p.id)} title="Delete" style={{ color: 'var(--error)' }}>
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
+        )}
+      </div>
 
-          <Card glass={true} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-            <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Layout size={18} style={{ color: 'var(--primary)' }} />
-              Need Inspiration?
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5', margin: 0 }}>
-              Check out our design showcases and build responsive layout sets optimized for tech and creative roles.
-            </p>
-            <a href="/#templates" style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 'bold' }}>
-              Browse templates &rarr;
-            </a>
+      {/* Right Side: Quick Actions */}
+      <div className="pb-quick-actions-col">
+        <h3 style={{ margin: 0, fontSize: '18px' }}>Quick Actions</h3>
+        <div className="pb-quick-actions">
+          <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/create')}>
+            <Plus size={20} style={{ color: 'var(--primary)' }} />
+            <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Create Portfolio</span>
+          </Card>
+          <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/downloads')}>
+            <History size={20} style={{ color: 'var(--accent)' }} />
+            <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Downloads</span>
+          </Card>
+          <Card hoverable className="pb-action-card" onClick={() => navigate('/dashboard/settings')}>
+            <Settings size={20} style={{ color: 'var(--success)' }} />
+            <span style={{ fontSize: '12px', fontWeight: 'semibold' }}>Settings</span>
           </Card>
         </div>
+      </div>
+
+      {/* Right Side: Help/Inspiration */}
+      <div className="pb-inspiration-col">
+        <Card glass={true} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+          <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Layout size={18} style={{ color: 'var(--primary)' }} />
+            Need Inspiration?
+          </h4>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.5', margin: 0 }}>
+            Check out our design showcases and build responsive layout sets optimized for tech and creative roles.
+          </p>
+          <a href="/#templates" style={{ fontSize: '12px', color: 'var(--primary)', fontWeight: 'bold' }}>
+            Browse templates &rarr;
+          </a>
+        </Card>
       </div>
 
       <ConfirmDialog
