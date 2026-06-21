@@ -244,6 +244,63 @@ export default function MyPortfolios() {
           background-color: var(--bg-card-hover);
         }
 
+        .pb-p-card-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-2);
+          margin-top: auto;
+          border-top: 1px solid var(--border);
+          padding-top: var(--space-4);
+        }
+
+        @media (max-width: 768px) {
+          .pb-table-container {
+            border: none;
+            background: transparent;
+          }
+          .pb-list-table thead {
+            display: none;
+          }
+          .pb-list-table, 
+          .pb-list-table tbody, 
+          .pb-list-table tr, 
+          .pb-list-table td {
+            display: block;
+            width: 100%;
+          }
+          .pb-list-table tr {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-sm);
+          }
+          .pb-list-table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) 0 !important;
+            border-bottom: 1px dashed var(--border) !important;
+            text-align: right;
+            font-size: var(--font-size-xs);
+          }
+          .pb-list-table td:last-child {
+            border-bottom: none !important;
+            padding-top: var(--space-4) !important;
+            justify-content: flex-end;
+          }
+          .pb-list-table td::before {
+            content: attr(data-label);
+            font-weight: var(--fw-bold);
+            color: var(--text-secondary);
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+          }
+        }
+
         @media (min-width: 768px) {
           .pb-grid-container { grid-template-columns: repeat(2, 1fr); }
         }
@@ -311,7 +368,7 @@ export default function MyPortfolios() {
       </div>
 
       {loading ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-6)' }}>
+        <div className="pb-grid-container">
           <Skeleton variant="card" count={3} />
         </div>
       ) : filteredPortfolios.length === 0 ? (
@@ -361,11 +418,11 @@ export default function MyPortfolios() {
             <tbody>
               {filteredPortfolios.map((p) => (
                 <tr key={p.id}>
-                  <td><strong style={{ fontSize: '14px' }}>{p.title}</strong></td>
-                  <td>{p.portfolioType}</td>
-                  <td>{getStatusBadge(p.status)}</td>
-                  <td>{new Date(p.updatedAt).toLocaleDateString()}</td>
-                  <td>
+                  <td data-label="Title"><strong style={{ fontSize: '14px' }}>{p.title}</strong></td>
+                  <td data-label="Type">{p.portfolioType}</td>
+                  <td data-label="Status">{getStatusBadge(p.status)}</td>
+                  <td data-label="Last Updated">{new Date(p.updatedAt).toLocaleDateString()}</td>
+                  <td data-label="Actions">
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <Button variant="secondary" size="sm" icon={Edit} onClick={() => navigate(`/dashboard/edit/${p.id}`)}>Edit</Button>
                       <Button variant="secondary" size="sm" icon={Eye} onClick={() => navigate(`/dashboard/preview/${p.id}`)} />
