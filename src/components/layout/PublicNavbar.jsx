@@ -90,6 +90,17 @@ export default function PublicNavbar() {
           display: block;
           color: var(--text-primary);
           cursor: pointer;
+          background: none;
+          border: none;
+          padding: var(--space-2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: var(--radius-md);
+          transition: var(--transition-fast);
+        }
+        .pb-menu-btn:hover {
+          background-color: var(--border);
         }
         
         /* Mobile Overlay Menu */

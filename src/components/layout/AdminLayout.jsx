@@ -5,7 +5,7 @@ import Topbar from './Topbar';
 import ToastContainer from '../ui/Toast';
 
 export default function AdminLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -39,6 +39,9 @@ export default function AdminLayout() {
           flex-direction: column;
           gap: var(--space-8);
         }
+        .pb-sidebar-backdrop {
+          display: none;
+        }
 
         @media (max-width: 768px) {
           .pb-main-container {
@@ -47,8 +50,24 @@ export default function AdminLayout() {
           .pb-main-container-collapsed {
             padding-left: 0;
           }
+          .pb-sidebar-backdrop {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: calc(var(--z-sticky) - 1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s ease;
+          }
         }
       `}</style>
+      {isSidebarOpen && (
+        <div className="pb-sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
+      )}
       <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className={`pb-main-container ${!isSidebarOpen ? 'pb-main-container-collapsed' : ''}`}>
         <Topbar onMenuClick={toggleSidebar} />

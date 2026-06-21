@@ -50,6 +50,23 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         .pb-sidebar-collapsed {
           width: 70px;
         }
+        .pb-sidebar-open {
+          width: 260px;
+        }
+
+        @media (max-width: 768px) {
+          .pb-sidebar {
+            transform: translateX(-100%);
+          }
+          .pb-sidebar-open {
+            transform: translateX(0);
+            width: 260px;
+          }
+          .pb-sidebar-collapsed {
+            transform: translateX(-100%);
+            width: 260px;
+          }
+        }
         
         .pb-sidebar-header {
           height: 70px;

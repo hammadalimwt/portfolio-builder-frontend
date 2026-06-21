@@ -186,6 +186,20 @@ export default function DashboardHome() {
           .pb-stats-row { grid-template-columns: repeat(4, 1fr); }
           .pb-dash-grid { grid-template-columns: 1.5fr 1fr; }
         }
+        @media (max-width: 480px) {
+          .pb-portfolio-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-3);
+          }
+          .pb-row-actions {
+            width: 100%;
+            justify-content: flex-end;
+          }
+          .pb-quick-actions {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       {/* Stats row */}
