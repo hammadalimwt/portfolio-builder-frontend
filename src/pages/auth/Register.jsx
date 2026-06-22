@@ -162,14 +162,14 @@ export default function Register() {
       <div className="pb-auth-sidebar">
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', fontWeight: 'bold' }}>
           <Layers style={{ color: 'var(--primary)' }} />
-          <span>PortfolioBuilder</span>
+          <span>PortfolioMaker</span>
         </Link>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <h2 style={{ fontSize: '36px', fontWeight: '900', lineHeight: '1.2' }}>Powering the next gen of resume portfolios.</h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '15px' }}>Join over 10,000 developers, creators, and freelancers who export and host production-ready resume files.</p>
         </div>
         <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-          &copy; {new Date().getFullYear()} PortfolioBuilder SaaS MVP.
+          &copy; {new Date().getFullYear()} PortfolioMaker SaaS MVP.
         </div>
       </div>
 
@@ -178,7 +178,7 @@ export default function Register() {
         <Card className="pb-auth-card" glass={true}>
           <div className="pb-auth-logo">
             <Layers style={{ color: 'var(--primary)' }} />
-            <span className="gradient-text">PortfolioBuilder</span>
+            <span className="gradient-text">PortfolioMaker</span>
           </div>
           <h1 className="pb-auth-title">Create Account</h1>
           <p className="pb-auth-subtitle">Build your premium portfolio in minutes</p>

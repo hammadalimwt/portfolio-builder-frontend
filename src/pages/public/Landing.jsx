@@ -35,7 +35,7 @@ export default function Landing() {
     : templates.filter(t => t.category === activeTab);
 
   const faqItems = [
-    { question: 'Do I need coding experience to use PortfolioBuilder?', answer: 'Absolutely not! PortfolioBuilder is designed for non-technical users. Choose a template, fill in your details in our structured forms, and we generate a fully functional website for you.' },
+    { question: 'Do I need coding experience to use PortfolioMaker?', answer: 'Absolutely not! PortfolioMaker is designed for non-technical users. Choose a template, fill in your details in our structured forms, and we generate a fully functional website for you.' },
     { question: 'What formats can I download?', answer: 'You download a production-ready ZIP file containing highly optimized HTML, CSS, and JavaScript. You can run it locally, upload it to any host (Netlify, Vercel, Github Pages, etc.) or open the files to make edits.' },
     { question: 'Is my data secure?', answer: 'Yes, your data is stored securely in our MongoDB database and only accessible by you. Any images you upload are managed via professional Cloudinary storage.' },
     { question: 'Can I change my template later?', answer: 'Yes, you can duplicate your portfolio or switch templates at any time without losing the information you already entered.' },

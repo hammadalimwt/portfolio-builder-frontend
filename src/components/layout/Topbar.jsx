@@ -34,7 +34,7 @@ export default function Topbar({ onMenuClick }) {
     if (path.startsWith('/dashboard/downloads')) return 'ZIP Downloads';
     if (path.startsWith('/dashboard/settings')) return 'Profile Settings';
     if (path.startsWith('/admin')) return 'Admin Control Panel';
-    return 'Portfolio Builder';
+    return 'Portfolio Maker';
   };
 
   const handleLogout = async () => {
@@ -44,7 +44,7 @@ export default function Topbar({ onMenuClick }) {
 
   const notifications = [
     { id: 1, text: 'Portfolio "My Resume" ZIP generation complete!', time: '10 mins ago', unread: true },
-    { id: 2, text: 'Welcome to PortfolioBuilder SaaS!', time: '1 day ago', unread: false },
+    { id: 2, text: 'Welcome to PortfolioMaker SaaS!', time: '1 day ago', unread: false },
   ];
 
   return (

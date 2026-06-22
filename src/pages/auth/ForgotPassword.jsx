@@ -353,14 +353,14 @@ export default function ForgotPassword() {
       <div className="pb-auth-sidebar">
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', fontWeight: 'bold', textDecoration: 'none', color: 'white' }}>
           <Layers style={{ color: 'var(--primary)' }} />
-          <span>PortfolioBuilder</span>
+          <span>PortfolioMaker</span>
         </Link>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <h2 style={{ fontSize: '36px', fontWeight: '900', lineHeight: '1.2', color: 'white' }}>Recover Your Account Easily.</h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '15px', lineHeight: '1.6' }}>Regain access to your personal dashboards, templates, and resume portfolios with our secure password recovery system.</p>
         </div>
         <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-          &copy; {new Date().getFullYear()} PortfolioBuilder SaaS MVP.
+          &copy; {new Date().getFullYear()} PortfolioMaker SaaS MVP.
         </div>
       </div>
 
@@ -369,7 +369,7 @@ export default function ForgotPassword() {
         <Card className="pb-auth-card" glass={true}>
           <div className="pb-auth-logo">
             <Layers style={{ color: 'var(--primary)' }} />
-            <span className="gradient-text">PortfolioBuilder</span>
+            <span className="gradient-text">PortfolioMaker</span>
           </div>
 
           {/* Stepper */}

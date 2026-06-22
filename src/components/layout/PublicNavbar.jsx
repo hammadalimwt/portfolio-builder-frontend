@@ -137,7 +137,7 @@ export default function PublicNavbar() {
       <div className="container pb-nav-container">
         <Link to="/" className="pb-logo">
           <Layers className="pb-logo-icon" size={24} />
-          <span className="gradient-text">PortfolioBuilder</span>
+          <span className="gradient-text">PortfolioMaker</span>
         </Link>
 
         <div className="pb-nav-links">

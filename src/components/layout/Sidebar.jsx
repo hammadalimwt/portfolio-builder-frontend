@@ -180,7 +180,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       <div className="pb-sidebar-header">
         <NavLink to="/dashboard" className="pb-sidebar-logo">
           <Layers className="pb-sidebar-logo-icon" size={24} />
-          <span className="pb-sidebar-logo-text gradient-text">PortfolioBuilder</span>
+          <span className="pb-sidebar-logo-text gradient-text">PortfolioMaker</span>
         </NavLink>
         <button
           className="pb-sidebar-toggle-btn"

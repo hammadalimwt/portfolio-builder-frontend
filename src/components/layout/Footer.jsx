@@ -123,7 +123,7 @@ export default function Footer() {
           <div className="pb-footer-brand">
             <div className="pb-footer-logo">
               <Layers className="pb-footer-logo-icon" size={26} />
-              <span className="gradient-text">PortfolioBuilder</span>
+              <span className="gradient-text">PortfolioMaker</span>
             </div>
             <p className="pb-footer-tagline">
               Empowering developers, designers, and creatives to build and export production-quality portfolios in minutes.
@@ -163,7 +163,7 @@ export default function Footer() {
 
         <div className="pb-footer-bottom">
           <span className="pb-footer-copyright">
-            &copy; {new Date().getFullYear()} PortfolioBuilder SaaS. All rights reserved.
+            &copy; {new Date().getFullYear()} PortfolioMaker SaaS. All rights reserved.
           </span>
           <div className="pb-footer-bottom-links">
             <a href="#" className="pb-footer-bottom-link">Terms of Service</a>
